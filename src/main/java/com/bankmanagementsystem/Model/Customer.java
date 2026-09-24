@@ -22,6 +22,7 @@ public class Customer {
      */
     public Customer(int customerID, String customerName, String phone,
                     String address, String email, String pass){
+        super();
 
         this.customerID   = customerID;
         this.customerName = customerName;
