@@ -1,17 +1,102 @@
-package com.bankmanagementsystem;
+package com.bankmanagementsystem.Console;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import com.bankmanagementsystem.CustomException.CustomerNotFoundException;
+import com.bankmanagementsystem.CustomException.DuplicateCustomerFoundException;
+import com.bankmanagementsystem.Models.Customer;
+import com.bankmanagementsystem.Repositories.CustomerRepository;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void main(String[] args) {
+
+        /*
+        Scanner Class Object
+         */
+
+        Scanner input = new Scanner(System.in);
+
+        /*
+        Repository Class Object
+         */
+        CustomerRepository customerRepository =
+                new CustomerRepository();
+
+
+
+
+        while (true){
+            try{
+                System.out.println("\n");
+                System.out.println("==============================");
+                System.out.println("     E-COMMERCE SYSTEM");
+                System.out.println("==============================");
+
+                System.out.println("1. Register");
+                System.out.println("2. Login");
+                System.out.println("3. Add Product");
+                System.out.println("4. Show Products");
+                System.out.println("5. Search Product");
+                System.out.println("6. Add Product to Cart");
+                System.out.println("7. Remove Product from Cart");
+                System.out.println("8. View Cart");
+                System.out.println("9. Place Order");
+                System.out.println("10. Payment");
+                System.out.println("11. Order History");
+                System.out.println("12. Exit");
+
+                System.out.println("Enter Your Choice : ");
+                int choice  = input.nextInt();
+
+                switch (choice){
+
+                    case 1 :
+
+                        System.out.println("Enter Customer ID : ");
+                        int cusId = input.nextInt();
+
+                        /*
+                        Buffer Clear
+                         */
+
+                        input.nextLine();
+
+                        System.out.println("Enter Customer Name : ");
+                        String cusName = input.nextLine();
+                        System.out.println("Enter Customer Address : ");
+                        String cusAddress = input.nextLine();
+                        System.out.println("Enter Customer Phone : ");
+                        String cusPhone = input.nextLine();
+                        System.out.println("Enter Customer Email : ");
+                        String cusEmail = input.nextLine();
+                        System.out.println("Enter Customer Pass : ");
+                        String cusPass = input.nextLine();
+                        try {
+                            customerRepository.addCustomer(new Customer(cusId, cusName, cusAddress, cusPhone,
+                                    cusEmail, cusPass));
+                        }catch (DuplicateCustomerFoundException e){
+                            System.out.println("Error : " + e.getMessage());
+                        }
+
+
+
+
+
+                        break;
+                }
+
+
+
+
+            }catch (InputMismatchException e){
+                System.out.println("Error : " + e.getMessage());
+                input.nextLine();
+            }
+
         }
+
     }
 }

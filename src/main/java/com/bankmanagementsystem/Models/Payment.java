@@ -1,4 +1,4 @@
-package com.bankmanagementsystem.Model;
+package com.bankmanagementsystem.Models;
 
 public class Payment {
 
