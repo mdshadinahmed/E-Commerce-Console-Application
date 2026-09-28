@@ -1,4 +1,4 @@
-package com.bankmanagementsystem.Model;
+package com.bankmanagementsystem.Models;
 
 public class Customer {
 
@@ -26,6 +26,7 @@ public class Customer {
 
         this.customerID   = customerID;
         this.customerName = customerName;
+        this.address      = address;
         this.phone        = phone;
         this.email        = email;
         this.pass         = pass;
