@@ -60,4 +60,24 @@ public class CustomerRepository {
 
     }
 
-}
+
+    public void findById(int customerId){
+
+
+        if (!customers.isEmpty()){
+
+            for (Customer customer : customers) {
+                if (customerId == customer.getCustomerID()) {
+                    customer.displayUserInfo();
+                    break;
+                }
+            }
+
+        }else {
+            throw new CustomerNotFoundException("Customer Not Found!");
+        }
+
+    }
+
+    }
+
