@@ -61,7 +61,7 @@ public class CustomerRepository {
     }
 
 
-    public void findById(int customerId){
+    public void findCustomerById(int customerId){
 
 
         if (!customers.isEmpty()){
