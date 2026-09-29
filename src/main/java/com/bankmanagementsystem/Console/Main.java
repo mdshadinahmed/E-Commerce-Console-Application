@@ -1,10 +1,12 @@
 package com.bankmanagementsystem.Console;
 
 
+import com.bankmanagementsystem.CustomException.CustomerAlreadyRegisteredException;
 import com.bankmanagementsystem.CustomException.CustomerNotFoundException;
 import com.bankmanagementsystem.CustomException.DuplicateCustomerFoundException;
 import com.bankmanagementsystem.Models.Customer;
 import com.bankmanagementsystem.Repositories.CustomerRepository;
+import com.bankmanagementsystem.ServiceLayer.CustomerService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -24,6 +26,13 @@ public class Main {
          */
         CustomerRepository customerRepository =
                 new CustomerRepository();
+
+
+        /*
+        Service Class
+         */
+        CustomerService customerService =
+                new CustomerService(customerRepository);
 
 
 
@@ -75,9 +84,10 @@ public class Main {
                         System.out.println("Enter Customer Pass : ");
                         String cusPass = input.nextLine();
                         try {
-                            customerRepository.addCustomer(new Customer(cusId, cusName, cusAddress, cusPhone,
-                                    cusEmail, cusPass));
-                        }catch (DuplicateCustomerFoundException e){
+                            Customer customer  = new Customer(cusId, cusName, cusAddress, cusPhone,
+                                    cusEmail, cusPass);
+                            customerService.registerCustomer(customer);
+                        }catch (CustomerAlreadyRegisteredException e){
                             System.out.println("Error : " + e.getMessage());
                         }
 

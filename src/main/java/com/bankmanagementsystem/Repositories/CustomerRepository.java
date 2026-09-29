@@ -1,5 +1,6 @@
 package com.bankmanagementsystem.Repositories;
 
+import com.bankmanagementsystem.CustomException.CustomerAlreadyRegisteredException;
 import com.bankmanagementsystem.CustomException.CustomerNotFoundException;
 import com.bankmanagementsystem.CustomException.DuplicateCustomerFoundException;
 import com.bankmanagementsystem.Models.Customer;
@@ -32,17 +33,18 @@ public class CustomerRepository {
         return customers;
     }
 
-    public void addCustomer(Customer customer) throws DuplicateCustomerFoundException {
+    public void addCustomer(Customer customer) throws CustomerAlreadyRegisteredException {
 
         int presentCusID = customer.getCustomerID();
 
         for(Customer customer1 : customers){
             if (presentCusID == customer1.getCustomerID()){
-                throw  new DuplicateCustomerFoundException("Customer Already Exit!");
+                throw  new CustomerAlreadyRegisteredException("Customer Already Registered!");
             }
         }
 
         customers.add(customer);
+        System.out.println("Customer Successfully Registered...");
     }
 
 
@@ -61,14 +63,16 @@ public class CustomerRepository {
     }
 
 
-    public void findCustomerById(int customerId){
+    public Customer findCustomerById(int customerId){
 
+        Customer customer1 = null;
 
         if (!customers.isEmpty()){
 
             for (Customer customer : customers) {
                 if (customerId == customer.getCustomerID()) {
                     customer.displayUserInfo();
+                    customer1 = customer;
                     break;
                 }
             }
@@ -77,7 +81,11 @@ public class CustomerRepository {
             throw new CustomerNotFoundException("Customer Not Found!");
         }
 
+        return customer1;
+
     }
+
+
 
     }
 
