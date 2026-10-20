@@ -4,6 +4,7 @@ package com.bankmanagementsystem.Console;
 import com.bankmanagementsystem.CustomException.CustomerAlreadyRegisteredException;
 import com.bankmanagementsystem.CustomException.CustomerNotFoundException;
 import com.bankmanagementsystem.CustomException.DuplicateCustomerFoundException;
+import com.bankmanagementsystem.CustomException.EmailNotMatchException;
 import com.bankmanagementsystem.Models.Customer;
 import com.bankmanagementsystem.Repositories.CustomerRepository;
 import com.bankmanagementsystem.ServiceLayer.CustomerService;
@@ -59,6 +60,7 @@ public class Main {
 
                 System.out.println("Enter Your Choice : ");
                 int choice  = input.nextInt();
+                input.nextLine();
 
                 switch (choice){
 
@@ -90,8 +92,29 @@ public class Main {
                         }catch (CustomerAlreadyRegisteredException e){
                             System.out.println("Error : " + e.getMessage());
                         }
+                        break;
 
+                    case 2:
 
+                        System.out.print("Enter Your Email: ");
+                        String email = input.nextLine();
+                        System.out.println("You entered: " + email);
+
+                        System.out.print("Enter Your password: ");
+                        String pass = input.nextLine();
+                        System.out.println("Password received.");
+
+                        try{
+                            customerService.login(email, pass);
+                        }catch (CustomerNotFoundException e){
+                            System.out.println("Error : " + e.getMessage());
+
+                        }catch (EmailNotMatchException e){
+                            System.out.println("Error : " + e.getMessage());
+                        }
+                        catch (Exception e){
+                            System.out.println("Error : " + e.getMessage());
+                        }
 
 
 
