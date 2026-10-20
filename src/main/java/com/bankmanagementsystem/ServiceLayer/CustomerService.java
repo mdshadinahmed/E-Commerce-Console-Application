@@ -28,7 +28,18 @@ public class CustomerService {
 
     public void registerCustomer(Customer customer)
             throws CustomerAlreadyRegisteredException {
-       customerRepositories.addCustomer(customer);
+       customerRepositories.registerCustomer(customer);
+        System.out.println();
+        System.out.println("Login Please.");
+    }
+
+
+    public void login(String email, String pass){
+
+        customerRepositories.findByEmail(email);
+        customerRepositories.findByPass(pass);
+
+        System.out.println("Login Successfully!");
     }
 
 }
