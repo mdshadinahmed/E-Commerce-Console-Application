@@ -6,8 +6,11 @@ import com.bankmanagementsystem.CustomException.CustomerNotFoundException;
 import com.bankmanagementsystem.CustomException.DuplicateCustomerFoundException;
 import com.bankmanagementsystem.CustomException.EmailNotMatchException;
 import com.bankmanagementsystem.Models.Customer;
+import com.bankmanagementsystem.Models.Product;
 import com.bankmanagementsystem.Repositories.CustomerRepository;
+import com.bankmanagementsystem.Repositories.ProductRepository;
 import com.bankmanagementsystem.ServiceLayer.CustomerService;
+import com.bankmanagementsystem.ServiceLayer.ProductService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -27,6 +30,8 @@ public class Main {
          */
         CustomerRepository customerRepository =
                 new CustomerRepository();
+        ProductRepository productRepository =
+                new ProductRepository();
 
 
         /*
@@ -34,7 +39,8 @@ public class Main {
          */
         CustomerService customerService =
                 new CustomerService(customerRepository);
-
+        ProductService productService =
+                new ProductService(productRepository);
 
 
 
@@ -108,17 +114,46 @@ public class Main {
                             customerService.login(email, pass);
                         }catch (CustomerNotFoundException e){
                             System.out.println("Error : " + e.getMessage());
-
                         }catch (EmailNotMatchException e){
                             System.out.println("Error : " + e.getMessage());
                         }
                         catch (Exception e){
                             System.out.println("Error : " + e.getMessage());
                         }
-
-
-
                         break;
+
+                    case 3:
+
+                        System.out.println("Enter Product Id : ");
+                        int productId = input.nextInt();
+
+                        /*
+                        Buffer Clear
+                         */
+                        input.nextLine();
+
+                        System.out.println("Enter Product Name : ");
+                        String productName = input.nextLine();
+
+                        System.out.println("Enter Product Price : ");
+                        double productPrice = input.nextDouble();
+
+                        /*
+                        Buffer Clear
+                         */
+                        input.nextLine();
+
+                        System.out.println("Enter Stock : ");
+                        int stock = input.nextInt();
+
+                        input.nextLine();
+
+                        Product product =
+                                new Product(productId, productName, productPrice, stock);
+                        productService.addProduct(product);
+                        break;
+
+
                 }
 
 
