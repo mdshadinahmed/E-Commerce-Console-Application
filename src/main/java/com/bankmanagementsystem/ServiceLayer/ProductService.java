@@ -1,6 +1,7 @@
 package com.bankmanagementsystem.ServiceLayer;
 
 import com.bankmanagementsystem.CustomException.DuplicateProductFoundException;
+import com.bankmanagementsystem.CustomException.ProductNotFoundException;
 import com.bankmanagementsystem.Models.Product;
 import com.bankmanagementsystem.Repositories.ProductRepository;
 
@@ -15,12 +16,23 @@ public class ProductService {
 
     public void addProduct (Product product){
 
-
         try{
             productRepository.saveProduct(product);
         }catch (DuplicateProductFoundException e){
             System.out.println("Error : " + e.getMessage());
         }
 
+    }
+
+
+    public void showAllProducts(){
+
+        try{
+            for(Product product : productRepository.findAllProducts()){
+                product.displayProductInfo();
+            }
+        }catch (ProductNotFoundException e){
+            System.out.println("Error : " + e.getMessage());
+        }
     }
 }

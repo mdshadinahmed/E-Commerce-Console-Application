@@ -153,6 +153,10 @@ public class Main {
                         productService.addProduct(product);
                         break;
 
+                    case 4:
+                        productService.showAllProducts();
+                        break;
+
 
                 }
 
@@ -160,7 +164,7 @@ public class Main {
 
 
             }catch (InputMismatchException e){
-                System.out.println("Error : " + e.getMessage());
+                System.out.println("Error : " + "Wrong Input!\nPlease Enter Valid Input.");
                 input.nextLine();
             }
 

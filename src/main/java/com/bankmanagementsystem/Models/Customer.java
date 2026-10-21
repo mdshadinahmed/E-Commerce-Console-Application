@@ -9,6 +9,8 @@ public class Customer {
     private String email;
     private String pass;
 
+    private boolean isLoggIn = false;
+
     /*
     The main reason default constructor to ignore constructor miss match
               in the child class
@@ -30,6 +32,8 @@ public class Customer {
         this.phone        = phone;
         this.email        = email;
         this.pass         = pass;
+
+        this.isLoggIn = true;
 
     }
 
@@ -62,6 +66,10 @@ public class Customer {
         return customerName;
     }
 
+    public boolean getLoggIn(){
+        return isLoggIn;
+    }
+
     /*
     Setter
      */
@@ -90,11 +98,15 @@ public class Customer {
         this.customerName = customerName;
     }
 
+    public void setLoggIn(boolean isRegistered){
+        this.isLoggIn = isRegistered;
+    }
 
 
     /*
         Display User Info
      */
+
     public void displayUserInfo() {
 
         System.out.println("Customer{" +
