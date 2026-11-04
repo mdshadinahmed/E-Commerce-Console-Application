@@ -33,13 +33,42 @@ public class ProductRepository {
 
     }
 
+    /**
+     * Find All Product by ID
+     */
     public List<Product> findAllProducts()
             throws ProductNotFoundException {
 
-          if (products.isEmpty()){
-              throw new ProductNotFoundException("Product Not Available!");
-          }
-          return products;
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("Product Not Available!");
+        }
+        return products;
     }
 
+    /**
+     * Find Product By ID
+     */
+    public Product searchProductByID(int productID)
+            throws ProductNotFoundException {
+
+        Product getProduct = null;
+
+        if (!products.isEmpty()) {
+
+            for (Product product : products) {
+
+                if (product.getProductId() == productID) {
+                    getProduct = product;
+                    break;
+                }
+
+            }
+        }
+
+        if (products == null) {
+            throw new ProductNotFoundException("Product Not Found Exception!");
+        }
+        return getProduct;
+
+    }
 }
